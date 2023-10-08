@@ -47,20 +47,6 @@
     <h2 class="container font-1-xxl">escolha a sua<span class="cor-p1">.</span></h2>
 
     <ul>
-
-
-      <?php $resultado = [];
-      foreach ($resultado as $item) { ?>
-        <li>
-          <a href="./bicicletas/<?= explode(" ", $item->getNome())[0] ?>.html">
-          <img src="./img/bicicletas/<?= $item->getImagemName()?>" alt="Bicicleta preta">
-          <h3 class="font-1-xl"><?= $item->getNome()?></h3>
-          <span class="font-2-m cor-8">R$ <?= $item->getPreco()?></span>
-          </a>
-        </li>
-      <?php }?>
-
-
       <li>
         <a href="./bicicletas/magic.html">
           <img src="./img/bicicletas/magic-home.jpg" alt="Bicicleta preta" width="920" height="1040">
