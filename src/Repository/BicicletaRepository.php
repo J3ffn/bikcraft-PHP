@@ -21,6 +21,31 @@ class BicicletaRepository extends ServiceEntityRepository
         parent::__construct($registry, Bicicleta::class);
     }
 
+    public function add(Bicicleta $bicicleta, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($bicicleta);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Bicicleta $bicicleta, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($bicicleta);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function removeById(int $idBicicleta): void
+    {
+        $Bicicleta = $this->getEntityManager()->getPartialReference(Bicicleta::class, $idBicicleta);
+        $this->remove($Bicicleta, true);
+    }
+
+
 //    /**
 //     * @return Bicicleta[] Returns an array of Bicicleta objects
 //     */

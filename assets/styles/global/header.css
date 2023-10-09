@@ -18,11 +18,9 @@
   gap: 40px;
 }
 
-.home-container li {
-  list-style: none;
-}
-
-
+/*.home-container li {*/
+/*  list-style: none;*/
+/*}*/
 
 .header-menu a {
   display: inline-block;

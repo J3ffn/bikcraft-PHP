@@ -9,9 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Bicicleta
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column("id_bicicleta")]
-    private int $id;
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]
+    #[ORM\Column(name: "id_bicicleta", type: 'integer')]
+    private int $id = 4;
 
     public function __construct(
         #[ORM\Column(length: 60)]
@@ -24,7 +24,7 @@ class Bicicleta
         private string $descricao,
 
         #[ORM\Column(name: "nomeImagem", length: 30)]
-        private string $nomeImagem
+        private string $nomeImagem = "magic-home.jpg"
     ) {
     }
 
