@@ -76,9 +76,23 @@ Siga os passos abaixo para configurar e executar o projeto:
     - Os controladores Symfony estão no diretório ```src/Controller/```.
     - As entidades Doctrine estão no diretório ```src/Entity/```.
 
-  - End-points:
+  - Paginas:
     - ```/bicicleta``` te leva a landing page de bicicletas.
     - ```/bicicleta/admin``` te leva a área de administração das bicicletas em estoque.
+   
+   - End-points:
+      | Nome da Rota                  | Método  | Host  | Caminho                                   |
+      |:-----------------------------:|:-------:|:-----:|:----------------------------------------:|
+      | app_bicicleta_listar          |   GET   |  ANY  |           /bicicleta                     |
+      | app_bicicleta_form            |   GET   |  ANY  |         /bicicleta/admin                 |
+      | app_bicicleta_adicionar_form  |   GET   |  ANY  |          /bicicleta/main                 |
+      | app_bicicleta_list            |   GET   |  ANY  |           /bicicleta                     |
+      | app_bicicleta_adicionar       |   POST  |  ANY  |  /bicicleta/admin/adicionar             |
+      | app_bicicleta_editar_form     |   GET   |  ANY  | /bicicleta/admin/{bicicleta}            |
+      | app_bicicleta_editar          |   POST  |  ANY  | /bicicleta/admin/edit/{bicicleta}       |
+      | app_delete_bicicleta         |   POST  |  ANY  | /bicicleta/admin/delete/{id}            |
+
+
 
 # Comandos Úteis
 
