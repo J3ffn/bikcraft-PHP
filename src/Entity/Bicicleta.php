@@ -10,7 +10,7 @@ class Bicicleta
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column("id_bicicleta")]
     private int $id;
 
     public function __construct(
@@ -23,7 +23,7 @@ class Bicicleta
         #[ORM\Column(length: 255)]
         private string $descricao,
 
-        #[ORM\Column(length: 30)]
+        #[ORM\Column(name: "nomeImagem", length: 30)]
         private string $nomeImagem
     ) {
     }
