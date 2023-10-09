@@ -90,7 +90,7 @@ Siga os passos abaixo para configurar e executar o projeto:
       | app_bicicleta_adicionar       |   POST  |  ANY  |  /bicicleta/admin/adicionar             |
       | app_bicicleta_editar_form     |   GET   |  ANY  | /bicicleta/admin/{bicicleta}            |
       | app_bicicleta_editar          |   POST  |  ANY  | /bicicleta/admin/edit/{bicicleta}       |
-      | app_delete_bicicleta         |   POST  |  ANY  | /bicicleta/admin/delete/{id}            |
+      | app_delete_bicicleta         |   DELETE  |  ANY  | /bicicleta/admin/delete/{id}            |
 
 
 
