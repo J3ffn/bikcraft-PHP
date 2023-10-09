@@ -25,7 +25,7 @@
                         <div class="form-manipulacao">
                             <a class="editar botao" href="{{ path('app_bicicleta_editar_form', {bicicleta: bicicleta.id}) }}" >Editar</a>
 
-                            <form action="POST">
+                            <form method="post" action="{{ path('app_delete_bicicleta', {id: bicicleta.id}) }}">
                                 <button class="deletar botao">Deletar</button>
                             </form>
                         </div>

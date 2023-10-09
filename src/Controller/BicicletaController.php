@@ -83,18 +83,12 @@ class BicicletaController extends AbstractController
         return new RedirectResponse('/bicicleta/admin');
     }
 
-    #[Route(
-        '/bicicleta/delete/{id}',
-        name: 'app_delete_bicicleta',
-        methods: ['POST'],
-        requirements: ['id' => '[0-9]+']
-    )]
-    public function deleteBicicleta(int $id): Response
+    #[Route('/bicicleta/admin/delete/{id}', name: 'app_delete_bicicleta', methods: 'POST',  requirements: ['id' => '[0-9]+'])]
+    public function deletarBicicleta(int $id, Request $request): Response
     {
         $this->bicicletaRepository->removeById($id);
         $this->addFlash('success', 'Bicicleta removida com sucesso');
 
-        return new RedirectResponse('/bicicletas');
+        return new RedirectResponse('/bicicleta/admin');
     }
-
 }

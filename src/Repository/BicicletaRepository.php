@@ -45,7 +45,6 @@ class BicicletaRepository extends ServiceEntityRepository
         $this->remove($Bicicleta, true);
     }
 
-
 //    /**
 //     * @return Bicicleta[] Returns an array of Bicicleta objects
 //     */
