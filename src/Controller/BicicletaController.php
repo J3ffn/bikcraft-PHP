@@ -24,8 +24,9 @@ class BicicletaController extends AbstractController
     #[Route('/bicicleta', name: "app_bicicleta_listar", methods: "GET")]
     public function bicicletaIndex(): Response
     {
+
         return $this->render('bicicleta/index.html.twig', [
-            'controller_name' => 'BicicletaController',
+            'listaBicicletas' => $this->bicicletaRepository->findAll()
         ]);
     }
 
@@ -83,7 +84,8 @@ class BicicletaController extends AbstractController
         return new RedirectResponse('/bicicleta/admin');
     }
 
-    #[Route('/bicicleta/admin/delete/{id}', name: 'app_delete_bicicleta', methods: 'DELETE',  requirements: ['id' => '[0-9]+'])]
+
+    #[Route('/bicicleta/admin/delete/{id}', name: 'app_delete_bicicleta', requirements: ['id' => '[0-9]+'], methods: ['DELETE'])]
     public function deletarBicicleta(int $id, Request $request): Response
     {
         $this->bicicletaRepository->removeById($id);
