@@ -8,7 +8,7 @@
 
     <div class="container">
         <section class="contato-formulario" aria-label="Formulário">
-            <form class="form" action="{{ bicicleta is defined ? path('app_bicicleta_editar') : path('app_bicicleta_adicionar') }}" method="POST">
+            <form class="form" action="{{ bicicleta is defined ? path('app_bicicleta_editar', {'bicicleta': bicicleta.id}) : path('app_bicicleta_adicionar') }}" method="POST">
                 <div>
                     <label for="nome">Nome</label>
                     <input type="text" id="nome" name="nome" placeholder="Seu nome" value="{{ bicicleta is defined ? bicicleta.nome : "" }}">
@@ -21,7 +21,7 @@
                     <label for="descricao">Descricao</label>
                     <input type="text" id="descricao" name="descricao" placeholder="Muito bom!" value="{{ bicicleta.nome is defined ? bicicleta.descricao : ""}}">
                 </div>
-                <button class="botao col-2">Cadastrar</button>
+                <button class="botao col-2">{{ bicicleta.nome is defined ? "Editar" : "Cadastrar"}}</button>
             </form>
         </section>
     </div>

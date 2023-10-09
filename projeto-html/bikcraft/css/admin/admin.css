@@ -19,6 +19,7 @@
 }
 
 .editar {
+  background: var(--cor-5);
   padding: 12px;
 }
 
@@ -33,9 +34,15 @@
   background: var(--cor-9);
 }
 
+.btn-adicionar-container {
+  display: flex;
+  max-width: auto;
+  grid-column: 1/-1;
+  justify-content: end;
+}
+
 .btn-adicionar-container button {
-  display: grid;
-  align-self: end;
+  display: block;
 }
 
 @media (max-width: 1048px) {

@@ -10,11 +10,11 @@
         <article class="bicicletas-lista">
             <h2 class="container font-1-xxl">Administração<span class="cor-p1">:</span></h2>
 
-            <div class="btn-adicionar-container">
-                <a href="{{ path('app_bicicleta_adicionar_form') }}" class="btn-adicionar botao">Adicionar</a>
-            </div>
 
             <ul>
+                <div class="btn-adicionar-container">
+                    <a href="{{ path('app_bicicleta_adicionar_form') }}" class="btn-adicionar botao">Adicionar</a>
+                </div>
                 {% for bicicleta in listaBicicletas %}
                     <li>
                         <a href="./bicicletas/magic.html">
@@ -23,7 +23,8 @@
                             <span class="font-2-m cor-8">R$ {{ bicicleta.preco }}</span>
                         </a>
                         <div class="form-manipulacao">
-                            <a class="editar botao" href="{{ path('app_bicicleta_editar', {bicicleta: bicicleta.id}) }}">Editar</a>
+                            <a class="editar botao" href="{{ path('app_bicicleta_editar_form', {bicicleta: bicicleta.id}) }}" >Editar</a>
+
                             <form action="POST">
                                 <button class="deletar botao">Deletar</button>
                             </form>

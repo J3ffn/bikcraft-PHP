@@ -40,7 +40,7 @@ class BicicletaController extends AbstractController
     }
 
     #[Route("/bicicleta/main", name: "app_bicicleta_adicionar_form", methods: "GET")]
-    public function bicicletaAdicionarForm()
+    public function bicicletaAdicionarForm(): Response
     {
         return $this->render('bicicleta/form.html.twig');
     }
@@ -51,7 +51,7 @@ class BicicletaController extends AbstractController
         return $this->bicicletaRepository->findAll();
     }
 
-    #[Route("/bicicleta", name: "app_bicicleta_adicionar", methods: "POST")]
+    #[Route("/bicicleta/admin/adicionar", name: "app_bicicleta_adicionar", methods: "POST")]
     public function adicionarbicicleta(Request $request): Response
     {
         $nome = $request->request->get("nome");
@@ -62,16 +62,16 @@ class BicicletaController extends AbstractController
 
         $this->bicicletaRepository->add($bicicleta, true);
 
-        return $this->bicicletasAdmin();
+        return new RedirectResponse("/bicicleta/admin");
     }
 
-    #[Route("/bicicleta", name: "app_bicicleta_editar_form", methods: "GET")]
+    #[Route("/bicicleta/admin/{bicicleta}", name: "app_bicicleta_editar_form", methods: "GET")]
     public function editarBicicletaForm(Bicicleta $bicicleta): Response
     {
-        return $this->render("bicicleta/form.html.twig", compact($bicicleta));
+        return $this->render("bicicleta/form.html.twig", ["bicicleta" => $bicicleta]);
     }
 
-    #[Route("/bicicleta", name: "app_bicicleta_editar", methods: "POST")]
+    #[Route("/bicicleta/admin/edit/{bicicleta}", name: "app_bicicleta_editar", methods: "POST")]
     public function editarBicicleta(Bicicleta $bicicleta, Request $request): Response
     {
         $bicicleta->setNome($request->request->get("nome"));
@@ -80,7 +80,7 @@ class BicicletaController extends AbstractController
 
         $this->entityManager->flush();
 
-        return new RedirectResponse("/bicicleta/admin");
+        return new RedirectResponse('/bicicleta/admin');
     }
 
 }
