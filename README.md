@@ -32,10 +32,16 @@ Siga os passos abaixo para configurar e executar o projeto:
    git clone https://github.com/seu-usuario/seu-projeto.git
    ```
    
- 3. Navegue até o diretório do projeto:
+ 2. Navegue até o diretório do projeto:
     
     ```
     cd bikcraft-PHP/
+    ```
+
+ 3. Crie o arquivo .env.local na raiz do projeto adicione a seguinte linhe de configuração de banco:
+
+    ```
+    DATABASE_URL="mysql://<usuario>:<senha>@127.0.0.1:3306/<schema-banco-de-dados>"
     ```
 
 4. Instale as dependências PHP com o Composer:
@@ -50,24 +56,18 @@ Siga os passos abaixo para configurar e executar o projeto:
    npm install
     ```
 
-6. Crie o arquivo .env.local na raiz do projeto adicione a seguinte linhe de configuração de banco:
-
-    ```
-    DATABASE_URL="mysql://<usuario>:<senha>@127.0.0.1:3306/<schema-banco-de-dados>"
-    ```
-
-7. Compile o projeto com encore:
+6. Compile o projeto com encore:
    ```
     npm run dev
     ```
     
-9. Inicie o servidor de desenvolvimento do PHP:
+7. Inicie o servidor de desenvolvimento do PHP:
 
    ```
     php -S 0.0.0.0:8123 -t public
     ```
     
-10. Agora você pode acessar o projeto em http://localhost:8123 no seu navegador.
+8. Agora você pode acessar o projeto em http://localhost:8123 no seu navegador.
 
 # Uso
   - Estrutura de pastas:
