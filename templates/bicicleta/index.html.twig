@@ -26,14 +26,13 @@
         <ul>
             {% for bicicleta in listaBicicletas %}
                 <li>
-                    <a href="./bicicletas/magic.html">
+                    <a href="{{ path('app_bicicleta_info', {bicicleta: bicicleta.id}) }}">
                         <img src="./../img/bicicletas/{{ bicicleta.nomeImagem }}" alt="Bicicleta preta" width="920" height="1040">
                         <h3 class="font-1-xl">{{ bicicleta.nome }}</h3>
                         <span class="font-2-m cor-8">R$ {{ bicicleta.preco }}</span>
                     </a>
                 </li>
             {% endfor %}
-            analise e rporosta  eauteração no banco
         </ul>
     </article>
 

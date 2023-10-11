@@ -3,16 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Bicicleta;
+use App\Entity\TipoEmail;
 use App\Repository\BicicletaRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Scalar\String_;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BicicletaController extends AbstractController
@@ -68,17 +71,6 @@ class BicicletaController extends AbstractController
 
         $this->bicicletaRepository->add($bicicleta, true);
 
-        $user = $this->getUser();
-        $email = (new TemplatedEmail())
-            ->from('sistemao@example.com')
-            ->to('kamilasantosdev@gmail.com')
-            ->subject('Bicicleta adicionada!')
-            ->text("Bicicleta {$bicicleta->getNome()} foi adicionada!")
-            ->htmlTemplate('emails/bicicleta-created.html.twig')
-            ->context(compact('bicicleta'));
-
-        $this->mailer->send($email);
-
         return new RedirectResponse("/bicicleta/admin");
     }
 
@@ -100,6 +92,17 @@ class BicicletaController extends AbstractController
         return new RedirectResponse('/bicicleta/admin');
     }
 
+    #[Route("/bicicleta/{bicicleta}", name: "app_bicicleta_info", methods: "GET")]
+    public function infoBicicleta(Bicicleta $bicicleta): Response
+    {
+        return $this->render("bicicleta/nimbuc.html.twig", ["bicicleta" => $bicicleta]);
+    }
+
+    #[Route("/bicicleta/comprar/{bicicleta}", name: "app_bicicleta_comprar", methods: "GET")]
+    public function comprarBicicleta(Bicicleta $bicicleta): Response
+    {
+        return $this->render("bicicleta/orcamento.html.twig", ["bicicleta" => $bicicleta]);
+    }
 
     #[Route('/bicicleta/admin/delete/{id}', name: 'app_delete_bicicleta', requirements: ['id' => '[0-9]+'], methods: ['DELETE'])]
     public function deletarBicicleta(int $id, Request $request): Response
@@ -109,4 +112,47 @@ class BicicletaController extends AbstractController
 
         return new RedirectResponse('/bicicleta/admin');
     }
+
+    #[Route("bicicleta/compra/{bicicleta}", name: "teste_rota", methods: "POST")]
+    public function testeRota(Bicicleta $bicicleta, Request $request): Response
+    {
+        $nome = $_POST["nome"];
+        $sobrenome = $_POST["sobrenome"];
+        $cpf = $_POST["cpf"];
+
+        $email = $_POST["email"];
+        $cep = $_POST["cep"];
+        $numero = $_POST["numero"];
+
+        $logradouro = $_POST["logradouro"];
+        $bairro = $_POST["bairro"];
+        $cidade = $_POST["cidade"];
+        $estado = $_POST["estado"];
+
+        $this->enviarEmail($bicicleta, TipoEmail::COMPRAR);
+
+        return $this->bicicletaIndex();
+    }
+
+    public function enviarEmail(Bicicleta $bicicleta, $tipoEmail): void
+    {
+        try {
+            $email = (new TemplatedEmail())
+                ->from('sistemao@example.com')
+                ->to('testando123424@gmail.com')
+                ->subject(key($tipoEmail))
+                ->text("Bicicleta {$bicicleta->getNome()} foi comprada!")
+                ->htmlTemplate('emails/bicicleta-created.html.twig')
+                ->context([
+                    "titulo" => key($tipoEmail),
+                    "texto" => $tipoEmail[key($tipoEmail)]
+                ]);
+
+                $this->mailer->send($email);
+
+        } catch (TransportExceptionInterface $e) {
+
+        }
+    }
+
 }

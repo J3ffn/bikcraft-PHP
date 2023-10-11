@@ -1,64 +1,64 @@
-.bicicletas-lista ul {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-auto-flow: dense;
+.list-container-bg .bicicletas-lista ul {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-auto-flow: dense;
 }
 
-.bicicletas-lista li {
-  border: 1px solid #4444;
-  border-style: dotted;
-  box-shadow: -1px 0px 10px 1px;
-  padding: 10px;
+.list-container-bg .bicicletas-lista li {
+    border: 1px solid #4444;
+    border-style: dotted;
+    box-shadow: -1px 0px 10px 1px;
+    padding: 10px;
 }
 
 .form-manipulacao {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: end;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: end;
 }
 
 .editar {
-  background: var(--cor-5);
-  padding: 12px;
+    background: var(--cor-5);
+    padding: 12px;
 }
 
 .deletar {
-  background: var(--cor-12);
-  color: #ffffff;
-  text-align: center;
-  padding: 12px;
+    background: var(--cor-12);
+    color: #ffffff;
+    text-align: center;
+    padding: 12px;
 }
 
 .deletar:hover {
-  background: var(--cor-9);
+    background: var(--cor-9);
 }
 
 .btn-adicionar-container {
-  display: flex;
-  max-width: auto;
-  grid-column: 1/-1;
-  justify-content: end;
+    display: flex;
+    max-width: auto;
+    grid-column: 1/-1;
+    justify-content: end;
 }
 
 .btn-adicionar-container button {
-  display: block;
+    display: block;
 }
 
 @media (max-width: 1048px) {
-  .bicicletas-lista ul {
-    grid-template-columns: auto auto;
-  }
+    .list-container-bg .bicicletas-lista ul {
+        grid-template-columns: auto auto;
+    }
 }
 
 @media (max-width: 664px) {
-  .bicicletas-lista ul {
-    grid-template-columns: 1fr;
-  }
-  .bicicletas-lista li {
-    border: 3px solid #4444;
-    border-style: dotted;
-    box-shadow: none;
-    padding: 10px;
-  }
+    .list-container-bg .bicicletas-lista ul {
+        grid-template-columns: 1fr;
+    }
+    .list-container-bg .bicicletas-lista li {
+        border: 3px solid #4444;
+        border-style: dotted;
+        box-shadow: none;
+        padding: 10px;
+    }
 }
