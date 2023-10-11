@@ -6,10 +6,13 @@ use App\Entity\Bicicleta;
 use App\Repository\BicicletaRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BicicletaController extends AbstractController
@@ -17,7 +20,8 @@ class BicicletaController extends AbstractController
 
     public function __construct(
         private BicicletaRepository $bicicletaRepository,
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
+        private MailerInterface $mailer,
     ) {
     }
 
@@ -44,6 +48,7 @@ class BicicletaController extends AbstractController
     public function bicicletaAdicionarForm(): Response
     {
         return $this->render('bicicleta/form.html.twig');
+
     }
 
     #[Route('/bicicleta', name: "app_bicicleta_list", methods: "GET")]
@@ -62,6 +67,17 @@ class BicicletaController extends AbstractController
         $bicicleta = new Bicicleta($nome, $preco, $descricao);
 
         $this->bicicletaRepository->add($bicicleta, true);
+
+        $user = $this->getUser();
+        $email = (new TemplatedEmail())
+            ->from('sistemao@example.com')
+            ->to('kamilasantosdev@gmail.com')
+            ->subject('Bicicleta adicionada!')
+            ->text("Bicicleta {$bicicleta->getNome()} foi adicionada!")
+            ->htmlTemplate('emails/bicicleta-created.html.twig')
+            ->context(compact('bicicleta'));
+
+        $this->mailer->send($email);
 
         return new RedirectResponse("/bicicleta/admin");
     }
